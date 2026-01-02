@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import Script from "next/script";
 
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | The Meme Lore",
   },
   description:
-    "The most comprehensive library of internet culture. Explore the history, meaning, and evolution of memes from their origins to modern day viral sensations.",
+    "The most comprehensive library of internet culture. Explore the history, meaning, and evolution of memes from their origins to modern day viral sensations. Featuring AI-powered search, detailed origin stories, comprehensive analytics, and a community-driven archive of global digital trends.",
   keywords: [
     "memes",
     "internet culture",
@@ -45,14 +46,23 @@ export const metadata: Metadata = {
     url: "https://thememelore.com",
     title: "The Meme Lore - Archive of Internet Culture",
     description:
-      "Join the waitlist for the most comprehensive library of internet culture. Explore the history, meaning, and evolution of memes.",
+      "Join the waitlist for the most comprehensive library of internet culture. Explore the history, meaning, and evolution of memes. Featuring AI-powered search, detailed origin stories, and comprehensive analytics.",
     siteName: "The Meme Lore",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "The Meme Lore - Archive of Internet Culture",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Meme Lore - Archive of Internet Culture",
     description:
-      "The archive is opening soon. Join us to explore the history and meaning behind internet culture.",
+      "The archive is opening soon. Featuring AI-powered search, detailed origin stories, and comprehensive analytics. Join us to explore the history and meaning behind internet culture.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -77,18 +87,27 @@ export default function RootLayout({
 }>) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "The Meme Lore",
-    url: "https://thememelore.com",
-    description: "The most comprehensive library of internet culture.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://thememelore.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-    sameAs: [
-      // Add social profiles here when available
-      // "https://twitter.com/thememelore",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        name: "The Meme Lore",
+        url: "https://thememelore.com",
+        description: "The most comprehensive library of internet culture.",
+        sameAs: [
+          // Add social profiles here when available
+          // "https://twitter.com/thememelore",
+        ],
+      },
+      {
+        "@type": "Organization",
+        name: "The Meme Lore",
+        url: "https://thememelore.com",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://thememelore.com/logo.png",
+        },
+        description: "The most comprehensive library of internet culture.",
+      },
     ],
   };
 
@@ -104,6 +123,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
