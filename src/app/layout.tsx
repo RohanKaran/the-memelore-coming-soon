@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Script from "next/script";
 
@@ -124,6 +125,7 @@ export default function RootLayout({
         />
         {children}
         <SpeedInsights />
+        <GoogleAnalytics gaId="G-Q3X18TJLME" />
       </body>
     </html>
   );
